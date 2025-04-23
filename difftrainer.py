@@ -635,9 +635,9 @@ class tabview(ctk.CTkTabview):
         uta_zip = os.path.join(os.getcwd(), uta_url.split("/")[-1])
         uta_script_folder_name = "nnsvs-db-converter-main"
 
-        diffsinger_url = "https://github.com/agentasteriski/DiffSinger/archive/refs/heads/version2-backport.zip"
+        diffsinger_url = "https://github.com/openvpi/DiffSinger/archive/refs/heads/muon_lynxnet2.zip"
         diffsinger_zip = os.path.join(os.getcwd(), diffsinger_url.split("/")[-1])
-        diffsinger_script_folder_name = "DiffSinger-version2-backport"
+        diffsinger_script_folder_name = "DiffSinger-muon_lynxnet2"
 
         vocoder_url = "https://github.com/openvpi/vocoders/releases/download/pc-nsf-hifigan-44.1k-hop512-128bin-2025.02/pc_nsf_hifigan_44.1k_hop512_128bin_2025.02.zip"
         vocoder_zip = os.path.join(os.getcwd(), vocoder_url.split("/")[-1])
@@ -1259,10 +1259,16 @@ class tabview(ctk.CTkTabview):
             if backbone==True:
                 #switches to wavenet backbone at default recommended settings
                 #it's the *alternate* backbone toggle, it makes it the opposite of what the default config does
-                bitch_ass_config["backbone_type"] = "wavenet"
-                bitch_ass_config["backbone_args"]["num_channels"] = 512
-                bitch_ass_config["backbone_args"]["num_layers"] = 20
-                bitch_ass_config["backbone_args"]["dilation_cycle_length"] = 4
+                # bitch_ass_config["backbone_type"] = "wavenet"
+                # bitch_ass_config["backbone_args"]["num_channels"] = 512
+                # bitch_ass_config["backbone_args"]["num_layers"] = 20
+                # bitch_ass_config["backbone_args"]["dilation_cycle_length"] = 4
+                bitch_ass_config["backbone_type"] = "lynxnet2"
+                bitch_ass_config["backbone_args"]["num_channels"] = 1024
+                bitch_ass_config["backbone_args"]["num_layers"] = 6
+                bitch_ass_config["backbone_args"]["kernel_size"] = 31
+                bitch_ass_config["backbone_args"]["dropout_rate"] = 0.0
+                # bitch_ass_config["backbone_args"]["strong_cond"] = True
             else:
                 #keeps lynxnet backbone at default recommended settings
                 #some people complain they're too heavy but I think they were trying to train on weak cards
@@ -1326,11 +1332,11 @@ class tabview(ctk.CTkTabview):
             if backbone==True:
                 #switches to lynxnet at default recommended settings
                 #it's the *alternate* backbone toggle, it makes it the opposite of what the default config does
-                bitch_ass_config["variances_prediction_args"]["backbone_type"] = "lynxnet"
+                bitch_ass_config["variances_prediction_args"]["backbone_type"] = "lynxnet2"
                 bitch_ass_config["variances_prediction_args"]["backbone_args"]['num_channels'] = 384
                 bitch_ass_config["variances_prediction_args"]["backbone_args"]['num_layers'] = 6
                 bitch_ass_config["variances_prediction_args"]["backbone_args"]['dropout_rate'] = 0.0
-                bitch_ass_config["variances_prediction_args"]["backbone_args"]['strong_cond'] = True
+                # bitch_ass_config["variances_prediction_args"]["backbone_args"]['strong_cond'] = True
                 bitch_ass_config["pitch_prediction_args"]["backbone_type"] = "lynxnet"
                 bitch_ass_config["pitch_prediction_args"]["backbone_args"]['num_channels'] = 512
                 bitch_ass_config["pitch_prediction_args"]["backbone_args"]['num_layers'] = 6
