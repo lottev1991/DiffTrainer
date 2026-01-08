@@ -1617,7 +1617,7 @@ class tabview(ctk.CTkTabview):
                     result[keys[0]] = value
             with open(spkmap, "w") as file:
                 json.dump(result, file)
-            cmdstage = ["python", 'scripts/export.py']
+            cmdstage = ['CUDA_VISIBLE_DEVICES=""', "python", 'scripts/export.py']
             ckpt_save_abs = os.path.abspath(ckpt_save_dir)
             onnx_folder_abs = os.path.abspath(onnx_folder_dir)
             if export_check == 1:
@@ -2351,3 +2351,4 @@ class App(ctk.CTk):
 if __name__ == "__main__":
     app = App()
     app.mainloop()
+
